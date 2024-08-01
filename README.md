@@ -1,7 +1,7 @@
 # ExpoMamba
 
 <p align="center">
-    <img src="assets/expomamba-logo.pdf" width="300">
+    <img src="assets/expomamba-logo.png" width="200">
 </p>
 
 This is the official repository of **[ExpoMamba: Exploiting Frequency SSM Blocks for Efficient and Effective Image Enhancement](https://openreview.net/forum?id=X9L6PatYhH). (ICML ES-FoMo 2024)**
