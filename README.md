@@ -7,7 +7,7 @@
 This is the official repository of **[ExpoMamba: Exploiting Frequency SSM Blocks for Efficient and Effective Image Enhancement](https://openreview.net/forum?id=X9L6PatYhH). (ICML ES-FoMo 2024)**
 *Eashan Adhikarla, Kai Zhang, John Nicholson, Brian D. Davison.*
 
-Code comming soon ...!!
+Code will be released on Sept 1, 2024.
 
 # BibTeX Reference
 If you found our paper and code useful, please cite the following paper:
