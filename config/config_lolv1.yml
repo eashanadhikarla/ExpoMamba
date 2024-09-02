@@ -1,0 +1,54 @@
+data:
+  traindir: '../datasets/LOL-v1/train/low/'
+  testdir: '../datasets/LOL-v1/val/low/' # or null
+
+  train_csv_file: '../datasets/LOL-v1/train_roi.csv'
+  val_csv_file: None
+  test_csv_file: '../datasets/LOL-v1/test.csv'
+
+  train_mean: [0.485, 0.456, 0.406] # [0.0063, 0.0061, 0.0056]
+  train_std:  [0.229, 0.224, 0.225] # [0.0059, 0.0056, 0.0059]
+  val_mean:   [0.485, 0.456, 0.406] # [0.0078, 0.0079, 0.0076]
+  val_std:    [0.229, 0.224, 0.225] # [0.0067, 0.0064, 0.0072]
+
+  split_percentage: 1           # default: 0.9 (to only use training data use '1')
+  task: 'low'                   # ['low', 'over', 'mixed']
+  image_size: null              # or !tuple (900,600)
+  input_patch_size: 324         # 128, 256, None will take orginal image size as input
+  num_test_samples: null        # 3 Reducing the test size to fit into the memory
+
+training:
+  loss_funcs:
+  # 'L1', 'SL1', 'Char', 'MSE', 'SSIM', 'VGG', 'MSSSIM', 'GHist', 'KL', 'L_color', 'YUV'
+    - 'L1'
+    - 'VGG'
+    - 'SSIM'
+    - 'LPIPS'
+    - 'YUV'
+
+  epochs: 1
+  batch_size: 18
+  lr:
+  weight_decay: 0.001 # 1e-5 1e-7
+  seed: 3407
+  testevery: 1
+  scheduler: 'LinearWarmupCosineAnnealingLR' # ['LinearWarmupCosineAnnealingLR', 'StepLR', 'MultiStepLR', 'CosineAnnealingLR', 'WarmupCosine']
+  # warmuprestartepochforcosine: [260] # Used for ConsineAnealling
+  # ----------
+  warmup_epochs: 5        # Used for Warmup-ConsineAnealling
+  gamma: 0.5              # Used for StepLR scheduler
+  step_size: 150          # Used for StepLR scheduler
+  milestones: [400, 800]  # Used for MultiStepLR scheduler
+
+model:
+  checkpoint_dir: null # null / "path to the previous checkpoint"
+  bilinear: True
+  base_channels: 48 # 192
+  deep_supervision: True
+
+debugging:
+  wandb: False
+  save_model: True
+  debug: False
+  ckpt_dir: "checkpoint/lolv1/lolv1"
+  tb: False
