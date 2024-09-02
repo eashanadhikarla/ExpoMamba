@@ -5,18 +5,8 @@ from torch.nn import functional as F
 
 # import vgg_loss
 # from torchvision.models import vgg16, VGG16_Weights
-
 from IQA_pytorch import SSIM, LPIPSvgg
-
 # from metrics import SSIM, PSNR
-# import piqa
-# import pyiqa
-# import lpips
-
-# from skimage.color.colorconv import rgb_from_xyz, get_xyz_coords, xyz_from_rgb
-# import pytorch_colors
-# import skimage
-# from skimage import color
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
@@ -154,35 +144,35 @@ class L_color(nn.Module):
         return k
 
 
-# #################
-# # Perceptual Loss
-# #################
-# class LossNetwork(torch.nn.Module):
-#     def __init__(self, vgg_model):
-#         super(LossNetwork, self).__init__()
-#         self.vgg_layers = vgg_model
-#         self.mse_loss = nn.MSELoss()
-#         self.layer_name_mapping = {
-#             '3' : "relu1_2",
-#             '8' : "relu2_2",
-#             '15': "relu3_3"
-#         }
+#################
+# Perceptual Loss
+#################
+class LossNetwork(torch.nn.Module):
+    def __init__(self, vgg_model):
+        super(LossNetwork, self).__init__()
+        self.vgg_layers = vgg_model
+        self.mse_loss = nn.MSELoss()
+        self.layer_name_mapping = {
+            '3' : "relu1_2",
+            '8' : "relu2_2",
+            '15': "relu3_3"
+        }
 
-#     def output_features(self, x):
-#         output = {}
-#         for name, module in self.vgg_layers._modules.items():
-#             x = module(x)
-#             if name in self.layer_name_mapping:
-#                 output[self.layer_name_mapping[name]] = x
-#         return list(output.values())
+    def output_features(self, x):
+        output = {}
+        for name, module in self.vgg_layers._modules.items():
+            x = module(x)
+            if name in self.layer_name_mapping:
+                output[self.layer_name_mapping[name]] = x
+        return list(output.values())
 
-#     def forward(self, pred_im, gt):
-#         loss = []
-#         pred_im_features = self.output_features(pred_im)
-#         gt_features = self.output_features(gt)
-#         for pred_im_feature, gt_feature in zip(pred_im_features, gt_features):
-#             loss.append(self.mse_loss(pred_im_feature, gt_feature))
-#         return sum(loss)/len(loss)
+    def forward(self, pred_im, gt):
+        loss = []
+        pred_im_features = self.output_features(pred_im)
+        gt_features = self.output_features(gt)
+        for pred_im_feature, gt_feature in zip(pred_im_features, gt_features):
+            loss.append(self.mse_loss(pred_im_feature, gt_feature))
+        return sum(loss)/len(loss)
 
 # ##########
 # # VGG Loss
