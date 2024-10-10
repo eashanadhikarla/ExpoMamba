@@ -11,6 +11,7 @@ This is the official repository of **[ExpoMamba: Exploiting Frequency SSM Blocks
 [x] Checkpoint release.
 [] Out of Distribution Lowlight training checkpoint. 
 
+# Checkpoint
 SICE Checkpoint: [Dropbox link](https://www.dropbox.com/scl/fo/sxvkb6s0hltwr5xtwz1q1/ABmL12pDLn6vpgPqyUwvecE?rlkey=8zn32y1cx1krv9168hyst0ud4&st=10u92ihy&dl=0)
 
 # BibTeX Reference
